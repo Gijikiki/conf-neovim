@@ -4,7 +4,7 @@ Originally from Kickstart.nvim
 
 ]]--
 
-vim.g.have_nerd_fond = true
+vim.g.have_nerd_font = true
 vim.g.loaded_netrw = 1 -- required for nvim-tree
 vim.g.loaded_netrwPlugin = -1 -- required for nvim-tree
 
