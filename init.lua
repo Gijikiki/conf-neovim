@@ -37,6 +37,28 @@ vim.opt.undofile = true			-- Save undo history
 vim.opt.updatetime = 250		-- Decrease update time
 vim.opt.virtualedit = "block"		-- Allow visual blocks to go past end of line
 
+-- Set win32yank as clipboard if WSL
+-- Requires win32yank in path: https://github.com/equalsraf/win32yank
+local function is_wsl()
+  local version = vim.fn.readfile("/proc/version")[1] or ""
+  return version:match("Microsoft") or version:match("WSL")
+end
+
+if is_wsl() then
+    vim.g.clipboard = {
+      name = "win32yank",
+    copy = {
+      ["+"] = "win32yank.exe -i --crlf",
+      ["*"] = "win32yank.exe -i --crlf",
+    },
+    paste = {
+      ["+"] = "win32yank.exe -o --lf",
+      ["*"] = "win32yank.exe -o --lf",
+    },
+    cache_enabled = 0
+  }
+end
+
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 vim.schedule(function()
