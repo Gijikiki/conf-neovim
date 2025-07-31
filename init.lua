@@ -233,13 +233,13 @@ require('lazy').setup({
       },
 
       spec = {
-        { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
+        { '<leader>c', group = '[C]ode/[C]opilot', mode = { 'n', 'x', 'v' } },
         { '<leader>d', group = '[D]ocument' },
+        { '<leader>g', group = '[G]it Hunk', mode = { 'n', 'v' } },
         { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
       },
     },
   },
@@ -594,6 +594,16 @@ require('lazy').setup({
     "nvim-treesitter/nvim-treesitter-textobjects",
   },
 
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "zbirenbaum/copilot.lua" },
+    },
+    config = function()
+      require("CopilotChat").setup()
+    end,
+  },
+
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
@@ -704,6 +714,22 @@ end
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 
+function copilot_buffer()
+  local input = vim.fn.input("Quick Chat: ")
+  if input ~= "" then
+    require("CopilotChat").ask(input, {
+      selection = require("CopilotChat.select").buffer
+      })
+  end
+end
+
+-- Note <leader>ca is used by code actions
+vim.keymap.set("n", "<leader>cb", copilot_buffer, {desc = "[B]uffer question"})
+vim.keymap.set("n", "<leader>co", require("CopilotChat").open, {desc = "[O]pen" })
+vim.keymap.set("n", "<leader>cr", require("CopilotChat").reset, {desc = "[R]eset" })
+vim.keymap.set("n", "<leader>ct", require("CopilotChat").toggle, {desc = "[T]oggle" })
+vim.keymap.set("n", "<leader>cx", require("CopilotChat").open, {desc = "[X] Close" })
+
 -- Configure keymaps for telescope
 vim.keymap.set("n", "<leader><leader>", require("telescope.builtin").buffers, {desc = "[ ] Find existing buffers" })
 vim.keymap.set("n", "<leader>f.", require("telescope.builtin").oldfiles, {desc = '[F]ind Recent Files ("." repeat)' })
@@ -723,6 +749,20 @@ vim.keymap.set("n", "<leader>ft", require("telescope.builtin").builtin, {desc = 
 vim.keymap.set("n", "<leader>fv", require("telescope.builtin").git_files, {desc = "[F]ind in Git ([V]ersion control)" })
 vim.keymap.set("n", "<leader>fw", require("telescope.builtin").grep_string, {desc = "'[F]ind current [W]ord" })
 
+-- Keymaps for git signs
+vim.keymap.set("n", "<leader>gb", require("gitsigns").blame_line, {desc = "[B]lame" })
+vim.keymap.set("n", "<leader>gc", require("telescope.builtin").git_commits, {desc = "[C]heckout commit" })
+vim.keymap.set("n", "<leader>gd", "<cmd>Getsigns diffthis HEAD", {desc = "[D]iff" })
+vim.keymap.set("n", "<leader>ghv", require("gitsigns").preview_hunk, {desc = "Pre[v]iew hunk" })
+vim.keymap.set("n", "<leader>gn", require("gitsigns").next_hunk, {desc = "[N]ext hunk" })
+vim.keymap.set("n", "<leader>go", require("telescope.builtin").git_status, {desc = "[O]pen changed file" })
+vim.keymap.set("n", "<leader>gp", require("gitsigns").prev_hunk, {desc = "[P]rev hunk" })
+vim.keymap.set("n", "<leader>gr", require("gitsigns").reset_hunk, {desc = "[R]eset hunk" })
+vim.keymap.set("n", "<leader>gs", require("gitsigns").stage_hunk, {desc = "[S]tage hunk" })
+vim.keymap.set("n", "<leader>gt", require("gitsigns").reset_buffer, {desc = "Rese[t] buffer" })
+vim.keymap.set("n", "<leader>gu", require("gitsigns").undo_stage_hunk, {desc = "[U]ndo stage hunk" })
+vim.keymap.set("n", "<leader>gw", require("telescope.builtin").git_branches, {desc = "S[w]itch branch" })
+
 -- Keymaps to toggle features
 vim.keymap.set("n", "<leader>tg", toggle_ghost_text, {desc = "[T]oggle [G]host Text" })
 vim.keymap.set("n", "<leader>tr", toggle_line_numbers, {desc = "[T]oggle [R]elative Line Numbers" })
@@ -731,20 +771,6 @@ vim.keymap.set("n", "<leader>tt", open_nvim_tree, {desc = "[T]oggle nvim-[T]ree"
 vim.keymap.set("n", "<leader>tih", indent_highlight_on, {desc = "[T]urn [I]ndent [H]ighlight On" })
 vim.keymap.set("n", "<leader>tin", indent_highlight_off, {desc = "[T]urn [I]ndent [N]ormal on" })
 vim.keymap.set("n", "<leader>tio", indent_hide, {desc = "[T]urn [I]ndent [O]ff" })
-
--- Keymaps for git signs
-vim.keymap.set("n", "<leader>hhn", require("gitsigns").next_hunk, {desc = "[N]ext hunk" })
-vim.keymap.set("n", "<leader>hhp", require("gitsigns").prev_hunk, {desc = "[P]rev hunk" })
-vim.keymap.set("n", "<leader>hhv", require("gitsigns").preview_hunk, {desc = "Pre[v]iew hunk" })
-vim.keymap.set("n", "<leader>hb", require("gitsigns").blame_line, {desc = "[B]lame" })
-vim.keymap.set("n", "<leader>hr", require("gitsigns").reset_hunk, {desc = "[R]eset hunk" })
-vim.keymap.set("n", "<leader>ht", require("gitsigns").reset_buffer, {desc = "Rese[t] buffer" })
-vim.keymap.set("n", "<leader>hs", require("gitsigns").stage_hunk, {desc = "[S]tage hunk" })
-vim.keymap.set("n", "<leader>hu", require("gitsigns").undo_stage_hunk, {desc = "[U]ndo stage hunk" })
-vim.keymap.set("n", "<leader>ho", require("telescope.builtin").git_status, {desc = "[O]pen changed file" })
-vim.keymap.set("n", "<leader>hw", require("telescope.builtin").git_branches, {desc = "S[w]itch branch" })
-vim.keymap.set("n", "<leader>hc", require("telescope.builtin").git_commits, {desc = "[C]heckout commit" })
-vim.keymap.set("n", "<leader>hd", "<cmd>Getsigns diffthis HEAD", {desc = "[D]iff" })
 
 -- Keymap for abbreviations
 vim.cmd('abbreviate zzab ansible.builtin.')
