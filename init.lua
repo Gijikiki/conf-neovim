@@ -114,10 +114,10 @@ require('lazy').setup({
           highlight_git = true,
           icons = {
             show = {
-              file = vim.g.have_nerd_fond,
-              folder = vim.g.have_nerd_fond,
-              folder_arrow = vim.g.have_nerd_fond,
-              git = vim.g.have_nerd_fond,
+              file = vim.g.have_nerd_font,
+              folder = vim.g.have_nerd_font,
+              folder_arrow = vim.g.have_nerd_font,
+              git = vim.g.have_nerd_font,
             },
           },
           symlink_destination = false,
