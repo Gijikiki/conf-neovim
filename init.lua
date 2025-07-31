@@ -799,6 +799,9 @@ vim.keymap.set("n", "<leader>tio", indent_hide, {desc = "[T]urn [I]ndent [O]ff" 
 -- Keymap for abbreviations
 vim.cmd('abbreviate zzab ansible.builtin.')
 
+-- Function & keymap for showing ghost text errors
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "[E]rror as float" })
+
 -- Works here, but not above
 require('nvim-treesitter.configs').setup {
   incremental_selection = {
