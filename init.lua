@@ -37,6 +37,12 @@ vim.opt.undofile = true			-- Save undo history
 vim.opt.updatetime = 250		-- Decrease update time
 vim.opt.virtualedit = "block"		-- Allow visual blocks to go past end of line
 
+
+-- Custom search
+vim.opt.hlsearch = true			-- Highlight on search but clear in normal mode
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+-- Clipboard Section
 -- Set win32yank as clipboard if WSL
 -- Requires win32yank in path: https://github.com/equalsraf/win32yank
 local function is_wsl()
@@ -64,10 +70,6 @@ end
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
-
--- Custom search
-vim.opt.hlsearch = true			-- Highlight on search but clear in normal mode
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
