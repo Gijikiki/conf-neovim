@@ -50,11 +50,14 @@ version of neovim (v0.10.4).
 
 ## Setup
 
-If you're brave enough to try it, clone as normal, symlink the repo to .config/nvim, and run with it.
+```
+git clone <repo-url> <local-dest>
+ln -s <local-dest> ~/.config/nvim
+```
 
 ---
 
-## Credit
+## Acknowledgements
 
 Big shout out to [https://github.com/nvim-lua/kickstart.nvim](kickstart.nvim).
 
@@ -66,3 +69,8 @@ latest versions of neovim, check out kickstart.nvim.
 
 And of course, thanks to the neovim project itself, as well as the wonderful
 community that has created plugins, provided support, and done so much.
+
+## License
+
+This configuration is licensed under the terms described in the
+[LICENSE.md](./LICENSE.md) file.
