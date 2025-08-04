@@ -23,26 +23,26 @@ return {
     },
   },
   build = "make",
-  keys = {
-    {
-      "<leader>a+",
-      function()
-        local tree_ext = require("avante.extensions.nvim_tree")
-        tree_ext.add_file()
-      end,
-      desc = "Select file in NvimTree",
-      ft = "NvimTree",
-    },
-    {
-        "<leader>a-",
-        function()
-      local tree_ext = require("avante.extensions.nvim_tree")
-      tree_ext.remove_file()
-        end,
-        desc = "Deselect file in NvimTree",
-        ft = "NvimTree",
-    },
-  },
+  -- keys = {
+  --   {
+  --     "<leader>a+",
+  --     function()
+  --       local tree_ext = require("avante.extensions.nvim_tree")
+  --       tree_ext.add_file()
+  --     end,
+  --     desc = "Select file in NvimTree",
+  --     ft = "NvimTree",
+  --   },
+  --   {
+  --       "<leader>a-",
+  --       function()
+  --     local tree_ext = require("avante.extensions.nvim_tree")
+  --     tree_ext.remove_file()
+  --       end,
+  --       desc = "Deselect file in NvimTree",
+  --       ft = "NvimTree",
+  --   },
+  -- },
   opts = {
     provider = "copilot",
     on_open = function()
