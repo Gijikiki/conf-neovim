@@ -85,7 +85,8 @@ vim.keymap.set("n", "<leader>fw", require("telescope.builtin").grep_string, {des
 -- Keymaps for git signs
 vim.keymap.set("n", "<leader>gb", require("gitsigns").blame_line, {desc = "[B]lame" })
 vim.keymap.set("n", "<leader>gc", require("telescope.builtin").git_commits, {desc = "[C]heckout commit" })
-vim.keymap.set("n", "<leader>gd", "<cmd>Getsigns diffthis HEAD", {desc = "[D]iff" })
+vim.keymap.set("n", "<leader>gd", require("gitsigns").toggle_deleted, {desc = "Toggle [D]eleted"})
+vim.keymap.set("n", "<leader>gD", require("gitsigns").diffthis, {desc = "[D]iff" })
 vim.keymap.set("n", "<leader>ghv", require("gitsigns").preview_hunk, {desc = "Pre[v]iew hunk" })
 vim.keymap.set("n", "<leader>gn", require("gitsigns").next_hunk, {desc = "[N]ext hunk" })
 vim.keymap.set("n", "<leader>go", require("telescope.builtin").git_status, {desc = "[O]pen changed file" })
@@ -95,6 +96,8 @@ vim.keymap.set("n", "<leader>gs", require("gitsigns").stage_hunk, {desc = "[S]ta
 vim.keymap.set("n", "<leader>gt", require("gitsigns").reset_buffer, {desc = "Rese[t] buffer" })
 vim.keymap.set("n", "<leader>gu", require("gitsigns").undo_stage_hunk, {desc = "[U]ndo stage hunk" })
 vim.keymap.set("n", "<leader>gw", require("telescope.builtin").git_branches, {desc = "S[w]itch branch" })
+
+
 
 -- Keymaps to toggle features
 -- Indent management functions have been moved to `indent-blankline.lua`
