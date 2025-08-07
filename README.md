@@ -44,7 +44,7 @@ version of neovim (v0.10.4).
 - Minimal startup time
 - Language-aware editing (Treesitter, LSP, DAP)
 - A cohesive terminal + editing experience
-- AI support (Currently using Copilot-Chat, may switch to Avante without warning)
+- AI support (Using Avante currently)
 
 ---
 

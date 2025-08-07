@@ -45,21 +45,23 @@ local function toggle_ghost_text()
 end
 
 -- Copilot function for keymaps
-local function copilot_buffer()
-  local input = vim.fn.input("Quick Chat: ")
-  if input ~= "" then
-    require("CopilotChat").ask(input, {
-      selection = require("CopilotChat.select").buffer
-      })
-  end
-end
+-- Disable plugin
+-- local function copilot_buffer()
+--   local input = vim.fn.input("Quick Chat: ")
+--   if input ~= "" then
+--     require("CopilotChat").ask(input, {
+--       selection = require("CopilotChat.select").buffer
+--       })
+--   end
+-- end
 
 -- Note <leader>ca is used by code actions
-vim.keymap.set("n", "<leader>cb", copilot_buffer, {desc = "[B]uffer question"})
-vim.keymap.set("n", "<leader>co", require("CopilotChat").open, {desc = "[O]pen" })
-vim.keymap.set("n", "<leader>cr", require("CopilotChat").reset, {desc = "[R]eset" })
-vim.keymap.set("n", "<leader>ct", require("CopilotChat").toggle, {desc = "[T]oggle" })
-vim.keymap.set("n", "<leader>cx", require("CopilotChat").open, {desc = "[X] Close" })
+-- Disable plugin
+-- vim.keymap.set("n", "<leader>cb", copilot_buffer, {desc = "[B]uffer question"})
+-- vim.keymap.set("n", "<leader>co", require("CopilotChat").open, {desc = "[O]pen" })
+-- vim.keymap.set("n", "<leader>cr", require("CopilotChat").reset, {desc = "[R]eset" })
+-- vim.keymap.set("n", "<leader>ct", require("CopilotChat").toggle, {desc = "[T]oggle" })
+-- vim.keymap.set("n", "<leader>cx", require("CopilotChat").open, {desc = "[X] Close" })
 
 -- Configure keymaps for telescope
 vim.keymap.set("n", "<leader><leader>", require("telescope.builtin").buffers, {desc = "[ ] Find existing buffers" })
