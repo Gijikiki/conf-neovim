@@ -4,5 +4,6 @@ vim.filetype.add({
       yaml = "yaml.ansible",
       md = "markdown",
       sh = "bash",
+      lua = "lua",
   },
 })
