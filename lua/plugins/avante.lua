@@ -3,6 +3,28 @@
 
 return {
   "yetone/avante.nvim",
+  opts = {
+    windows = {
+      ask = {
+        floating = false,
+        start_insert = true,
+        border = "rounded",
+      },
+      input = {
+        height = 10,
+      },
+    },
+    provider = "copilot",
+    on_open = function()
+      vim.api.nvim_buf_set_keymap(
+        -- 0 is current buffer
+        0, "n", "<CR>", ":lua require('avante').submit()<CR>", { noremap = true, silent = true }
+      )
+    end,
+    selector = {
+      exclude_auto_select = { "NvimTree" },
+    },
+  },
   dependencies = {
     "nvim-tree/nvim-web-devicons",
     "stevearc/dressing.nvim",
@@ -43,19 +65,4 @@ return {
   --       ft = "NvimTree",
   --   },
   -- },
-  opts = {
-    provider = "copilot",
-    on_open = function()
-      vim.api.nvim_buf_set_keymap(
-        0, -- Current buffer
-        "n", -- Normal mode
-        "<CR>", -- Enter key
-        ":lua require('avante').submit()<CR>", -- Submit functionality
-        { noremap = true, silent = true }
-      )
-    end,
-    selector = {
-      exclude_auto_select = { "NvimTree" },
-    },
-  },
 }
