@@ -5,5 +5,6 @@ vim.filetype.add({
       md = "markdown",
       sh = "bash",
       lua = "lua",
+      bash = "bash",
   },
 })
