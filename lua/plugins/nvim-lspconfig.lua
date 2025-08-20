@@ -5,11 +5,13 @@ return {
     { -- Automatically install LSPs and related tools to stdpath for Neovim
       'williamboman/mason.nvim',
       config = true,
-      tag = "v1.11.0",
+      -- Works with neovim 0.10.4
+      tag = vim.fn.has('nvim-0.11') == 0 and "v1.11.0" or nil,
     }, -- NOTE: Must be loaded before dependants
     {
       'williamboman/mason-lspconfig.nvim',
-      tag = "v1.32.0", -- Works with neovim 0.10.4
+     -- Works with neovim 0.10.4
+      tag = vim.fn.has('nvim-0.11') == 0 and "v1.32.0" or nil,
     },
     {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
